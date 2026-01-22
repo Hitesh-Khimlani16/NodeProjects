@@ -1,0 +1,17 @@
+{
+  "name": "developertinder",
+  "version": "1.0.0",
+  "description": "Developer Tinder",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node srv/app.js",
+    "dev": "nodemon srv/app.js"
+  },
+  "author": "Hitesh Khimlani",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1",
+    "nodemon": "^3.1.11"
+  }
+}
