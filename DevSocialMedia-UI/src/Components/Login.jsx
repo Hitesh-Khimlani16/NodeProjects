@@ -1,21 +1,33 @@
 import { useState } from "react";
 import axios from "axios";
-import { BASE_API_URL, LOGIN } from "../Utils/BASE_VALUES";
+import { BASE_API_URL, LOGIN_END_POINT } from "../Utils/BASE_VALUES";
+import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { addUSer } from "../Store/userSlice";
 
 const Login = () => {
     const [email, setEmail] = useState("spider@gmail.com");
     const [password, setPassword] = useState("1234");
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleLoginBtn = async () => {
-        const logInApiCall = await axios.post(BASE_API_URL + LOGIN, {
-            email: email,
-            password: password
-        }, {withCredentials: true}); 
-        // {withCredentials: true} is used to send cookies along with the request, 
-        // which is necessary for session management and authentication in many web applications. 
-        // It allows the server to recognize the client and maintain the session state across different requests.
+        try {
+            const logInApiCall = await axios.post(BASE_API_URL + LOGIN_END_POINT, {
+                email: email,
+                password: password
+            }, { withCredentials: true });
+            // {withCredentials: true} is used to send cookies along with the request, 
+            // which is necessary for session management and authentication in many web applications. 
+            // It allows the server to recognize the client and maintain the session state across different requests.
 
-        console.log(logInApiCall);
+            console.log(logInApiCall.data);
+            const user = logInApiCall.data;
+            dispatch(addUSer(user))
+            return navigate("/");
+        } catch (error) {
+            console.log("Login API error: ", error);
+        }
 
     }
 
