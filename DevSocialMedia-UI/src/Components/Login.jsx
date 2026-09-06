@@ -21,7 +21,7 @@ const Login = () => {
             // which is necessary for session management and authentication in many web applications. 
             // It allows the server to recognize the client and maintain the session state across different requests.
 
-            console.log(logInApiCall.data);
+            console.log("Login API call : ",logInApiCall.data);
             const user = logInApiCall.data;
             dispatch(addUSer(user))
             return navigate("/");

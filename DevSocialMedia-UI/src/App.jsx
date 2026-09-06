@@ -10,8 +10,6 @@ import ProtectedRoute, { PublicRoute } from './Components/ProtectedRoute'
 function App() {
   return (
     <>
-      {/* <Provider store={AppStore}>
-        <BrowserRouter > */}
       <Routes>
         {/* Public */}
         <Route element={<PublicRoute />} >
@@ -26,9 +24,6 @@ function App() {
           </Route>
         </Route>
       </Routes>
-      {/* </BrowserRouter>
-      </Provider> */}
-
     </>
   )
 }

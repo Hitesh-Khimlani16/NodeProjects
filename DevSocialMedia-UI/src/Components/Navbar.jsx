@@ -1,6 +1,23 @@
-import { Link } from "react-router-dom"
+import axios from "axios"
+import { Link, Navigate } from "react-router-dom"
+import { BASE_API_URL, LOGIN_END_POINT, LOGOUT_END_POINT } from "../Utils/BASE_VALUES"
+import { useDispatch } from "react-redux"
+import { removeUser } from "../Store/userSlice"
 
 const Navbar = () => {
+
+    const dispatch = useDispatch();
+    const handleLogOut = async ()=>{
+        try {
+            await axios.post(BASE_API_URL+LOGOUT_END_POINT, {}, {withCredentials:true});
+            dispatch(removeUser());
+            <Navigate to={LOGIN_END_POINT} />
+        } catch (error) {
+            console.log("Logout webt wrong...")
+        }
+        
+    }
+
     return (
         <div className="navbar bg-base-100 shadow-sm">
             <div className="flex-1">
@@ -25,7 +42,9 @@ const Navbar = () => {
                             </Link>
                         </li>
                         <li><a>Settings</a></li>
-                        <li><a>Logout</a></li>
+                        <li>
+                            <a onClick={handleLogOut} >Logout</a>
+                        </li>
                     </ul>
                 </div>
             </div>
